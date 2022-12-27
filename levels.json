@@ -1,0 +1,46 @@
+{
+  "medium": [
+    {
+      "word" : "animal",
+      "clue" : "Dog, cat,... dolphin is an?"
+    },
+    {
+      "word" : "library",
+      "clue" : "Place with a lot of books"
+    },
+    {
+      "word" : "hamburger",
+      "clue" : "Traditional American meal"
+    },
+    {
+      "word" : "school",
+      "clue" : "Education center"
+    },
+    {
+      "word" : "hospital",
+      "clue" : "When you are sick, you come to .."
+    }
+  ],
+  "hard" : [
+    {
+      "word" : "encyclopedia",
+      "clue" : "Very smart book"
+    },
+    {
+      "word" : "temperature",
+      "clue" : "In summer it´s higher, in winter it´s lower"
+    },
+    {
+      "word" : "accommodation",
+      "clue" : "Temporary home"
+    },
+    {
+      "word" : "anticipation",
+      "clue" : "Something is going to happen "
+    },
+    {
+      "word" : "turquoise",
+      "clue" : "An animal with hard back"
+    }
+  ]
+}

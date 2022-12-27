@@ -3,14 +3,16 @@ var dragged;
 var actDrag = false;
 
 function load(){
-    for(var i = 97; i < 123; i++){
+    for(var i = 65; i < 91; i++){
         const charDiv = document.createElement("div");
         charDiv.setAttribute("value",String.fromCharCode(i));
         charDiv.innerHTML = String.fromCharCode(i);
         charDiv.style.height = "50px";
         charDiv.style.width = "50px";
         charDiv.style.border = "2px solid black";
+        charDiv.style.borderRadius = "10px";
         charDiv.style.textAlign = "center";
+        charDiv.style.lineHeight= "50px";
         charDiv.draggable = "true";
         charDiv.addEventListener("dragenter",() => {
             if(!actDrag) {
