@@ -23,10 +23,17 @@ function load(){
             if(actDrag){
                 actDrag = false;
                 charDiv.style.visibility = "visible";
+
             }
 
         })
         abeceda.appendChild(charDiv);
     }
 }
+
+function allowDrop(ev) {
+    ev.preventDefault();
+    console.log(1);
+}
+
 
