@@ -1,0 +1,19 @@
+#abeceda{
+    padding: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: center;
+    gap: 30px;
+    width: 70%;
+    margin: 5% auto;
+}
+
+#place{
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    margin-right: auto;
+    margin-left: auto;
+}
