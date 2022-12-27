@@ -11,7 +11,7 @@
 
 
 </head>
-<body onload="load()">
+<body>
 
 <div id="hangman">
     <img src="icons/0_6WFhG2qCe5dPH1Fz_.png" alt="hangman">
@@ -21,9 +21,12 @@
 
 </div>
 
-<div id="napoveda">
-    <button>&#9432</button>
+<div >
+    <button id="difficulty">Medium</button>
+    <button id="hint">&#9432</button>
+    <div id="hintDiv"></div>
 </div>
+
 
 <div id="dragEndPlace" ondragover="allowDrop(event)">
 
