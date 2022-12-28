@@ -80,6 +80,7 @@ function check(char){
         index = current.word.indexOf(char.getAttribute("value").toLowerCase(),index);
         actWordState[index] = char.getAttribute("value");
         wordPlace.replaceChildren();
+
         displayLevel();
         index++;
     }
@@ -132,6 +133,8 @@ difficulty.addEventListener("click", () => {
     else{
         difficulty.innerHTML = "Medium";
     }
+    getRandomLevel();
+    displayLevel();
 })
 
 hint.onmouseover = function (){
