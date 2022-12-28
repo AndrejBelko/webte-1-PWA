@@ -94,14 +94,17 @@ function loadChars(){
 document.getElementById("wordPlace").addEventListener('dragover',(e) =>{
     e.preventDefault();
 })
+document.getElementById("wordPlace").addEventListener('dragleave',(e) =>{
+    e.preventDefault();
+})
+document.getElementById("wordPlace").addEventListener('dragstart',(e) =>{
+    e.preventDefault();
+})
 
 document.getElementById("wordPlace").addEventListener('drop',(e) =>{
-    //this.append(dragged);
     e.preventDefault();
-    if(e.target.id === "wordPlace"){
-        dragged.style.visibility = "visible";
-        check(dragged);
-    }
+    dragged.style.visibility = "visible";
+    check(dragged);
 })
 
 function check(char){
