@@ -1,12 +1,11 @@
 #abeceda{
-    padding: 50px 0;
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
     justify-content: center;
     gap: 30px;
     width: 55%;
-    margin: 5% auto;
+    margin: auto;
 }
 
 #dragEndPlace{

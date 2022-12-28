@@ -26,6 +26,7 @@ var actWordState = [];
 
 var currImage;
 
+
 fetch("./levels.json")
     .then(res => res.json())
     .then(data => {
