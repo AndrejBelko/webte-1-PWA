@@ -7,6 +7,7 @@ var result = document.getElementById("result");
 var resultDiv = document.getElementById("resultDiv");
 var hangman = document.getElementById("hangman");
 var reset = document.getElementById("reset");
+var nextMenu = document.getElementById("nextMenu");
 
 var modal = document.getElementById("modal")
 var message = document.getElementById("message");
@@ -21,10 +22,10 @@ var medium = [];
 var hard = [];
 
 var current;
+var currImage;
+
 
 var actWordState = [];
-
-var currImage;
 
 
 fetch("./levels.json")
@@ -46,7 +47,7 @@ function loadChars(){
     abeceda.innerHTML = "";
     let device = navigator.userAgent;
     let regexp = /android|iphone|kindle|ipad/i;
-    for(var i = 65; i < 91; i++){
+    for(let i = 65; i < 91; i++){
         const charDiv = document.createElement("div");
         charDiv.setAttribute("value",String.fromCharCode(i));
         charDiv.innerHTML = String.fromCharCode(i);
@@ -214,13 +215,14 @@ function resetHangman(){
     let tmp = document.createElement("img");
     tmp.setAttribute("src","images/0.png");
     tmp.setAttribute("alt","hangman state");
+    tmp.setAttribute("class","img-fluid");
     tmp.style.border = "2px solid black";
     tmp.style.borderRadius = "10px";
     hangman.appendChild(tmp);
 }
 
 function incrementHangman(){
-    if ( currImage === 9 ){
+    if ( currImage >= 9 ){
         completedLevel("You lost!")
     }
     currImage++;
@@ -228,6 +230,7 @@ function incrementHangman(){
     let value = "images/" + currImage.toString() + ".png";
     tmp.setAttribute("src",value);
     tmp.setAttribute("alt","hangman state");
+    tmp.setAttribute("class","img-fluid");
     tmp.style.border = "2px solid black";
     tmp.style.borderRadius = "10px";
     hangman.innerHTML = "";
@@ -286,4 +289,9 @@ retry.addEventListener("click", () => {
     modal.style.display = "none";
     wordPlace.replaceChildren();
     restartLevel();
+});
+
+nextMenu.addEventListener("click", () => {
+    wordPlace.replaceChildren();
+    nextLevel();
 });
