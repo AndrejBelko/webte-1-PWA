@@ -80,11 +80,9 @@ function check(char){
         index = current.word.indexOf(char.getAttribute("value").toLowerCase(),index);
         actWordState[index] = char.getAttribute("value");
         wordPlace.replaceChildren();
+
         displayLevel();
         index++;
-    }
-    if(current.word.indexOf(char.getAttribute("value").toLowerCase()) === -1 ){
-        char.style.visibility = "visible";
     }
 }
 
@@ -132,6 +130,9 @@ difficulty.addEventListener("click", () => {
     else{
         difficulty.innerHTML = "Medium";
     }
+    wordPlace.replaceChildren();
+    getRandomLevel();
+    displayLevel();
 })
 
 hint.onmouseover = function (){
