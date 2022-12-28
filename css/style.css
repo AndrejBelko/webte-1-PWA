@@ -17,3 +17,18 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+button{
+    background: transparent;
+    border: none !important;
+}
+
+#wordPlace{
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    font-size: 3rem;
+}
+
