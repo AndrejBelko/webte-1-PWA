@@ -24,7 +24,7 @@ var hard = [];
 var current;
 var currImage;
 
-
+var usedWords = [];
 var actWordState = [];
 
 
@@ -156,6 +156,20 @@ function getRandomLevel(){
             }
         }
     }
+
+    if(usedWords.length < 5) {
+        for (let i = 0; i < usedWords.length; i++) {
+            if (usedWords[i] === current) {
+                current = null;
+            }
+        }
+    }
+    if(current === null) {
+        getRandomLevel();
+    }else{
+        usedWords.push(current);
+    }
+
     for (let i = 0; i < current.word.length;i++){
         actWordState[i] = '_';
     }
@@ -207,23 +221,28 @@ function testCompletedLevel(){
 function completedLevel(text){
     modal.style.display = "block";
     message.innerHTML = text;
+    // zamknut pismenka nech sa enda laej tahat/klikat
 }
 
 function resetHangman(){
     currImage = 0;
-    hangman.innerHTML = "";
     let tmp = document.createElement("img");
     tmp.setAttribute("src","images/0.png");
     tmp.setAttribute("alt","hangman state");
     tmp.setAttribute("class","img-fluid");
     tmp.style.border = "2px solid black";
     tmp.style.borderRadius = "10px";
+    hangman.innerHTML = "";
     hangman.appendChild(tmp);
 }
 
 function incrementHangman(){
-    if ( currImage >= 9 ){
+    if ( currImage === 9 ){
         completedLevel("You lost!")
+    }
+    if ( currImage >= 10 ){ // positka lebo este neni zmeznene tahanie po skonceni levelu
+        completedLevel("You lost! man wtf u doin")
+        return;
     }
     currImage++;
     let tmp = document.createElement("img");
@@ -245,6 +264,8 @@ difficulty.addEventListener("click", () => {
     else{
         difficulty.innerHTML = "Medium";
     }
+    usedWords = [];
+    console.log(usedWords);
     wordPlace.replaceChildren();
     nextLevel();
 })
