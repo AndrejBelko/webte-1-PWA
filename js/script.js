@@ -91,14 +91,14 @@ function loadChars(){
 }
 
 
-document.getElementById("dragEndPlace").addEventListener('dragover',(e) =>{
+document.getElementById("wordPlace").addEventListener('dragover',(e) =>{
     e.preventDefault();
 })
 
-document.getElementById("dragEndPlace").addEventListener('drop',(e) =>{
+document.getElementById("wordPlace").addEventListener('drop',(e) =>{
     //this.append(dragged);
     e.preventDefault();
-    if(e.target.id === "dragEndPlace"){
+    if(e.target.id === "wordPlace"){
         dragged.style.visibility = "visible";
         check(dragged);
     }
