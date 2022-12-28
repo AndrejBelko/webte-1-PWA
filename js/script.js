@@ -112,7 +112,7 @@ function check(char){
     }
     char.style.visibility = "hidden";
 
-   if(count === 0){
+    if(count === 0){
         incrementHangman();
     }
 
