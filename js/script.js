@@ -25,6 +25,11 @@ var current;
 var currImage;
 
 
+navigator.serviceWorker.register('./sw.js')
+    .then((reg) => console.log('registered',reg))
+    .catch((err) => console.log('not registered',err))
+
+
 var actWordState = [];
 
 
