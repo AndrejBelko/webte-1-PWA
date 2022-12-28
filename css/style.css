@@ -18,10 +18,10 @@
     margin-left: auto;
 }
 
-button{
+/*button{
     background: transparent;
     border: none !important;
-}
+}*/
 
 #wordPlace{
     border: 2px solid black;
@@ -34,5 +34,24 @@ button{
 
 #hintDiv{
     visibility: hidden;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(100,100,100,0.6);
+    overflow: auto;
+}
+
+#closeBtn{
+    float: right;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    color: white;
 }
 

@@ -3,8 +3,17 @@ var difficulty = document.getElementById("difficulty");
 var hint = document.getElementById("hint");
 var wordPlace = document.getElementById("wordPlace");
 var hintDiv = document.getElementById("hintDiv");
+var result = document.getElementById("result");
+var resultDiv = document.getElementById("resultDiv");
 var hangman = document.getElementById("hangman");
 var reset = document.getElementById("reset");
+
+var modal = document.getElementById("modal")
+var message = document.getElementById("message");
+var next = document.getElementById("next");
+var retry = document.getElementById("retry");
+var closeBtn = document.getElementById("closeBtn");
+
 var dragged;
 var actDrag = false;
 
@@ -109,8 +118,11 @@ function check(char){
         displayLevel();
         index++;
         count++;
+
     }
     char.style.visibility = "hidden";
+
+    testCompletedLevel();
 
     if(count === 0){
         incrementHangman();
@@ -171,6 +183,27 @@ function restartLevel(){
     resetHangman();
 }
 
+function testCompletedLevel(){
+    let correct = 0;
+
+    for (let i = 0; i < current.word.length;i++){
+        if( actWordState[i] !== '_'){
+            correct++;
+        }
+    }
+    console.log(correct);
+    console.log(current.word.length);
+
+    if(correct === current.word.length){
+        completedLevel("You win!");
+    }
+}
+
+function completedLevel(text){
+    modal.style.display = "block";
+    message.innerHTML = text;
+}
+
 function resetHangman(){
     currImage = 0;
     hangman.innerHTML = "";
@@ -183,17 +216,17 @@ function resetHangman(){
 }
 
 function incrementHangman(){
-    if ( currImage === 10 ){
-        //prehral si
+    if ( currImage === 9 ){
+        completedLevel("You lost!")
     }
     currImage++;
-    hangman.innerHTML = "";
     let tmp = document.createElement("img");
     let value = "images/" + currImage.toString() + ".png";
     tmp.setAttribute("src",value);
     tmp.setAttribute("alt","hangman state");
     tmp.style.border = "2px solid black";
     tmp.style.borderRadius = "10px";
+    hangman.innerHTML = "";
     hangman.appendChild(tmp);
 }
 
@@ -223,3 +256,30 @@ hint.onmouseover = function (){
 hint.onmouseout = function (){
     hintDiv.style.visibility = "hidden";
 }
+
+result.onmouseover = function (){
+    resultDiv.innerHTML = current.word;
+    resultDiv.style.visibility = "visible"
+}
+
+
+result.onmouseout = function (){
+    resultDiv.style.visibility = "hidden";
+}
+
+//modal
+closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+next.addEventListener("click", () => {
+    modal.style.display = "none";
+    wordPlace.replaceChildren();
+    nextLevel();
+});
+
+retry.addEventListener("click", () => {
+    modal.style.display = "none";
+    wordPlace.replaceChildren();
+    restartLevel();
+});
