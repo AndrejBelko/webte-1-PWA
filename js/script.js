@@ -45,21 +45,23 @@ function loadChars(){
         charDiv.style.textAlign = "center";
         charDiv.style.lineHeight= "50px";
         charDiv.draggable = "true";
-        charDiv.addEventListener("dragenter",() => {
+        charDiv.addEventListener("dragenter",(e) => {
             if(!actDrag) {
                 actDrag = true;
-                dragged = event.target;
-                charDiv.style.visibility = "hidden";
+                dragged = e.target;
+                console.log(dragged);
+                //charDiv.style.visibility = "hidden";
             }
         })
-        charDiv.addEventListener("dragend",() => {
+        charDiv.addEventListener("dragend",(e) => {
             if(actDrag){
                 actDrag = false;
 
                 //nejako ze ak to draggol do end zony, nak zmizne, ak inde tak nak ostane, akoze to pismeno aktiualne tahane ved ty vies, ty vies
                 //potom zistic co draggol do end zony a ci sa to nechadza v slove, ak hej span zmenit na pismeno :)
 
-                check(charDiv);
+                console.log(e);
+                //charDiv.style.visibility = "hidden";
 
             }
 
@@ -70,10 +72,19 @@ function loadChars(){
     console.log(hard);
 }
 
-function allowDrop(ev) {
-    ev.preventDefault();
-    console.log(1);
-}
+
+document.getElementById("dragEndPlace").addEventListener('dragover',(e) =>{
+    e.preventDefault();
+})
+
+document.getElementById("dragEndPlace").addEventListener('drop',(e) =>{
+    //this.append(dragged);
+    e.preventDefault();
+    if(e.target.id === "dragEndPlace"){
+        dragged.style.visibility = "visible";
+        check(dragged);
+    }
+})
 
 function check(char){
 
@@ -90,6 +101,7 @@ function check(char){
         index++;
         count++;
     }
+    char.style.visibility = "hidden";
 
    if(count === 0){
         incrementHangman();
@@ -121,6 +133,7 @@ function getRandomLevel(){
     for (let i = 0; i < current.word.length;i++){
         actWordState[i] = '_';
     }
+
 }
 
 function displayLevel(){
