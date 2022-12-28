@@ -34,6 +34,8 @@ fetch("./levels.json")
 
 function loadChars(){
     abeceda.innerHTML = "";
+    let device = navigator.userAgent;
+    let regexp = /android|iphone|kindle|ipad/i;
     for(var i = 65; i < 91; i++){
         const charDiv = document.createElement("div");
         charDiv.setAttribute("value",String.fromCharCode(i));
@@ -66,6 +68,13 @@ function loadChars(){
             }
 
         })
+        if (regexp.test(device)) {
+            charDiv.addEventListener("click", (e) => {
+
+                dragged = e.target;
+                check(dragged);
+            })
+        }
         abeceda.appendChild(charDiv);
     }
     console.log(medium);
