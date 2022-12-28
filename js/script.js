@@ -84,9 +84,6 @@ function check(char){
         displayLevel();
         index++;
     }
-    if(current.word.indexOf(char.getAttribute("value").toLowerCase()) === -1 ){
-        char.style.visibility = "visible";
-    }
 }
 
 
@@ -133,6 +130,7 @@ difficulty.addEventListener("click", () => {
     else{
         difficulty.innerHTML = "Medium";
     }
+    wordPlace.replaceChildren();
     getRandomLevel();
     displayLevel();
 })
