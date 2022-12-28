@@ -35,6 +35,10 @@
     visibility: hidden;
 }
 
+#resultDiv{
+    visibility: hidden;
+}
+
 .modal {
     display: none;
     position: fixed;
