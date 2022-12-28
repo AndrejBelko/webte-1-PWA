@@ -2,7 +2,9 @@ var abeceda = document.getElementById("abeceda");
 var difficulty = document.getElementById("difficulty");
 var hint = document.getElementById("hint");
 var wordPlace = document.getElementById("wordPlace");
-var hintDiv = document.getElementById("hintDiv")
+var hintDiv = document.getElementById("hintDiv");
+var hangman = document.getElementById("hangman");
+var reset = document.getElementById("reset");
 var dragged;
 var actDrag = false;
 
@@ -12,6 +14,8 @@ var hard = [];
 var current;
 
 var actWordState = [];
+
+var currImage;
 
 fetch("./levels.json")
     .then(res => res.json())
@@ -25,12 +29,11 @@ fetch("./levels.json")
             hard.push(level);
         })
 
-        load();
-        getRandomLevel();
-        displayLevel();
+        nextLevel();
     })
 
-function load(){
+function loadChars(){
+    abeceda.innerHTML = "";
     for(var i = 65; i < 91; i++){
         const charDiv = document.createElement("div");
         charDiv.setAttribute("value",String.fromCharCode(i));
@@ -73,7 +76,9 @@ function allowDrop(ev) {
 }
 
 function check(char){
+
     let index = 0;
+    let count = 0;
 
     while(current.word.indexOf(char.getAttribute("value").toLowerCase(),index) >= 0){
 
@@ -83,7 +88,13 @@ function check(char){
 
         displayLevel();
         index++;
+        count++;
     }
+
+   if(count === 0){
+        incrementHangman();
+    }
+
 }
 
 
@@ -122,6 +133,48 @@ function displayLevel(){
     }
 }
 
+function nextLevel(){
+    loadChars();
+    getRandomLevel();
+    displayLevel();
+    resetHangman();
+}
+
+function restartLevel(){
+    loadChars();
+    for (let i = 0; i < current.word.length;i++){
+        actWordState[i] = '_';
+    }
+    displayLevel();
+    resetHangman();
+}
+
+function resetHangman(){
+    currImage = 0;
+    hangman.innerHTML = "";
+    let tmp = document.createElement("img");
+    tmp.setAttribute("src","images/0.png");
+    tmp.setAttribute("alt","hangman state");
+    tmp.style.border = "2px solid black";
+    tmp.style.borderRadius = "10px";
+    hangman.appendChild(tmp);
+}
+
+function incrementHangman(){
+    if ( currImage === 10 ){
+        //prehral si
+    }
+    currImage++;
+    hangman.innerHTML = "";
+    let tmp = document.createElement("img");
+    let value = "images/" + currImage.toString() + ".png";
+    tmp.setAttribute("src",value);
+    tmp.setAttribute("alt","hangman state");
+    tmp.style.border = "2px solid black";
+    tmp.style.borderRadius = "10px";
+    hangman.appendChild(tmp);
+}
+
 
 difficulty.addEventListener("click", () => {
     if (difficulty.innerHTML === "Medium"){
@@ -131,15 +184,20 @@ difficulty.addEventListener("click", () => {
         difficulty.innerHTML = "Medium";
     }
     wordPlace.replaceChildren();
-    getRandomLevel();
-    displayLevel();
+    nextLevel();
+})
+
+reset.addEventListener("click", () => {
+    wordPlace.replaceChildren();
+    restartLevel();
 })
 
 hint.onmouseover = function (){
     hintDiv.innerHTML = current.clue;
+    hintDiv.style.visibility = "visible"
 }
 
-//by som mozno zmenil na hintDiv visibility aby to na tej stranke neskakol ked sa to bude ukazovat a shovavat
+
 hint.onmouseout = function (){
-    hintDiv.innerHTML = "";
+    hintDiv.style.visibility = "hidden";
 }
