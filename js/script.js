@@ -11,6 +11,8 @@ var hard = [];
 
 var current;
 
+var actWordState = [];
+
 fetch("./levels.json")
     .then(res => res.json())
     .then(data => {
@@ -53,7 +55,8 @@ function load(){
 
                 //nejako ze ak to draggol do end zony, nak zmizne, ak inde tak nak ostane, akoze to pismeno aktiualne tahane ved ty vies, ty vies
                 //potom zistic co draggol do end zony a ci sa to nechadza v slove, ak hej span zmenit na pismeno :)
-                charDiv.style.visibility = "visible";
+
+                check(charDiv);
 
             }
 
@@ -67,6 +70,22 @@ function load(){
 function allowDrop(ev) {
     ev.preventDefault();
     console.log(1);
+}
+
+function check(char){
+    let index = 0;
+
+    while(current.word.indexOf(char.getAttribute("value").toLowerCase(),index) >= 0){
+
+        index = current.word.indexOf(char.getAttribute("value").toLowerCase(),index);
+        actWordState[index] = char.getAttribute("value");
+        wordPlace.replaceChildren();
+        displayLevel();
+        index++;
+    }
+    if(current.word.indexOf(char.getAttribute("value").toLowerCase()) === -1 ){
+        char.style.visibility = "visible";
+    }
 }
 
 
@@ -90,13 +109,17 @@ function getRandomLevel(){
             }
         }
     }
+    for (let i = 0; i < current.word.length;i++){
+        actWordState[i] = '_';
+    }
 }
 
 function displayLevel(){
     console.log(current);
     for (let i = 0; i < current.word.length;i++){
         let a = document.createElement("span");
-        a.innerHTML = " _ ";
+        a.style.margin = "5px";
+        a.innerHTML = actWordState[i];
         wordPlace.appendChild(a);
     }
 }
@@ -115,6 +138,7 @@ hint.onmouseover = function (){
     hintDiv.innerHTML = current.clue;
 }
 
+//by som mozno zmenil na hintDiv visibility aby to na tej stranke neskakol ked sa to bude ukazovat a shovavat
 hint.onmouseout = function (){
     hintDiv.innerHTML = "";
 }
