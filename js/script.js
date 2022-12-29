@@ -60,13 +60,11 @@ function loadChars(){
     for(let i = 65; i < 91; i++){
         const charDiv = document.createElement("div");
         charDiv.setAttribute("value",String.fromCharCode(i));
+        charDiv.setAttribute("class","letters");
         charDiv.innerHTML = String.fromCharCode(i);
-        charDiv.style.height = "50px";
-        charDiv.style.width = "50px";
         charDiv.style.border = "2px solid black";
         charDiv.style.borderRadius = "10px";
         charDiv.style.textAlign = "center";
-        charDiv.style.lineHeight= "50px";
         charDiv.style.background = "white";
         charDiv.draggable = "true";
         charDiv.addEventListener("dragstart",(e) => {
@@ -181,7 +179,6 @@ function displayLevel(){
         let a = document.createElement("span");
         a.style.margin = "5px";
         a.innerHTML = actWordState[i];
-        a.style.width = "40px";
         wordPlace.appendChild(a);
     }
 }
