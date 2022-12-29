@@ -277,7 +277,7 @@ result.onclick = function (){
 
 tutorial.onclick = function (){
     offcanvasLabel.innerHTML = "Tutorial";
-    offcanvasText.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením.";
+    offcanvasText.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením. Na mobilnom zariadení stačí pre reštart hry zatriasť mobilom.";
 }
 
 //modal
