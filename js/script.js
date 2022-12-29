@@ -277,45 +277,21 @@ reset.addEventListener("click", () => {
     restartLevel();
 })
 
-hint.addEventListener("click", () => {
+
+hint.onclick = function (){
     offcanvasLabel.innerHTML = "Hint";
-    offcanvasText.innerHTML = current.clue;
-})
-
-/*result.addEventListener("click", () => {
-    console.log("aaaaaa");
-    console.log(offcanvasLabel);
-    offcanvasLabel.innerHTML = "Result";
-    offcanvasText.innerHTML = current.word;
-})*/
-
-tutorial.addEventListener("click", () => {
-    console.log(offcanvasLabel);
-    offcanvasLabel.innerHTML = "Tutorial";
-    offcanvasText.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením.";
-})
-
-function testResult(){
-    console.log("aaaaaa");
-    console.log(offcanvasLabel);
-    offcanvasLabel.innerHTML = "Result";
-    offcanvasText.innerHTML = current.word;
-}
-
-/*hint.onclick = function (){
-    offcanvaLabel.innerHTML = "Hint";
     offcanvasText.innerHTML = current.clue;
 }
 
 result.onclick = function (){
-    offcanvaLabel.innerHTML = "Result";
+    offcanvasLabel.innerHTML = "Result";
     offcanvasText.innerHTML = current.word;
 }
 
 tutorial.onclick = function (){
-    offcanvaLabel.innerHTML = "Tutorial";
+    offcanvasLabel.innerHTML = "Tutorial";
     offcanvasText.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením.";
-}*/
+}
 
 //modal
 closeBtn.addEventListener("click", () => {
