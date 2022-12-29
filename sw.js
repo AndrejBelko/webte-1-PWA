@@ -17,6 +17,11 @@ const assets =[
     './images/10.png',
     './fallback.html',
     './levels.json',
+    './manifest.json',
+    'icons/icon-192x192.png',
+    'icons/icon-256x256.png',
+    'icons/icon-384x384.png',
+    'icons/icon-512x512.png',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
 ] ;
@@ -32,21 +37,26 @@ self.addEventListener('install', (evt) =>{
 
 });
 
-
 self.addEventListener('activate', (evt) =>{
     console.log('activated',evt);
+    /*evt.waitUntil(
+        caches.keys().then(keys => {
+            return Promise.all(keys
+                .filter(key => key !== staticCacheName)
+                .map(key => caches.delete(key))
+            )
+        })
+    )*/
 });
 //
 
 
 self.addEventListener('fetch', (evt) =>{
+    //console.log('fetched',evt);
     evt.respondWith(
-        caches.match(evt.request)
-            .then(function(response){
-                if(response){
-                    return response;
-                }
-            })
-    )
+        caches.match(evt.request).then(cacheRes => {
+            return cacheRes || fetch(evt.request)
+        })
+    );
 });
 
