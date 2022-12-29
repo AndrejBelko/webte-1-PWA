@@ -274,7 +274,7 @@ hint.onclick = function (){
 
 result.onclick = function (){
     offcanvasLabel.innerHTML = "Result";
-    offcanvasText.innerHTML = current.word;
+    offcanvasText.innerHTML = current.word.toUpperCase();
 }
 
 tutorial.onclick = function (){
