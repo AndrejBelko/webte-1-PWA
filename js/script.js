@@ -307,7 +307,6 @@ acl.addEventListener("reading", () => {
     if(acl.x > 12 || acl.y > 12){
         wordPlace.replaceChildren();
         restartLevel();
-        console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     }
 
     console.log(`Acceleration along the X-axis ${acl.x}`);
