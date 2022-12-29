@@ -299,8 +299,6 @@ nextMenu.addEventListener("click", () => {
     nextLevel();
 });
 
-shakeDetector.confirmPermissionGranted();
-shakeDetector.start();
 
 const acl = new Accelerometer({ frequency: 10 });
 acl.addEventListener("reading", () => {
