@@ -18,15 +18,25 @@
 <body>
 <div class="container text-center">
     <h1>Hangman</h1>
-
+    <!--data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"-->
     <div>
-        <button id="difficulty">Medium</button>
-        <button id="hint"><!--&#9432-->Hint</button>
-        <button id="result">Result</button>
-        <button id="reset">Reset</button>
-        <button id="nextMenu">Next</button>
-        <div id="hintDiv">.</div>
-        <div id="resultDiv">.</div>
+        <button class="btn btn-dark" type="button" id="reset">Reset</button>
+
+        <button class="btn btn-dark" type="button" id="difficulty">Medium</button>
+
+        <button class="btn btn-dark" type="button"
+                aria-controls="offcanvasBottom" id="hint">Hint
+        </button>
+
+        <div onclick ="testResult()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+                aria-controls="offcanvasBottom" id="result" >Result
+        </div>
+
+        <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+                aria-controls="offcanvasBottom" id="tutorial">Tutorial
+        </button>
+
+        <button class="btn btn-dark" type="button" id="nextMenu">Next</button>
     </div>
 
     <div id="hangman" class="text-center">
@@ -42,7 +52,7 @@
     </div>
 
     <div id="modal" class="modal">
-        <span id="closeBtn">&times;</span>
+        <span id="closeBtn">&times;</span>,,
         <div>
             <div id="message"></div>
             <button id="retry">Retry</button>
@@ -52,11 +62,24 @@
 
 </div>
 
+<div class="offcanvas offcanvas-bottom text-light bg-dark " data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1" id="offcanvasBottom"
+     aria-labelledby="offcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title ms-3" id="offcanvasLabel">hhh</h5>
+        <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body small ms-3 ">
+        <p id="offcanvasText">hhhhhhhh</p>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-<script src="js/script.js"></script>
+
 </body>
 </html>
 

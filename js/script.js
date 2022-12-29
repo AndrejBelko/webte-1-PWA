@@ -2,14 +2,15 @@ var abeceda = document.getElementById("abeceda");
 var difficulty = document.getElementById("difficulty");
 var hint = document.getElementById("hint");
 var wordPlace = document.getElementById("wordPlace");
-var hintDiv = document.getElementById("hintDiv");
 var result = document.getElementById("result");
-var resultDiv = document.getElementById("resultDiv");
 var hangman = document.getElementById("hangman");
 var reset = document.getElementById("reset");
 var nextMenu = document.getElementById("nextMenu");
+var tutorial = document.getElementById("tutorial");
+var offcanvasLabel = document.getElementById("offcanvasLabel");
+var offcanvasText = document.getElementById("offcanvasText");
 
-var modal = document.getElementById("modal")
+var modal = document.getElementById("modal");
 var message = document.getElementById("message");
 var next = document.getElementById("next");
 var retry = document.getElementById("retry");
@@ -145,7 +146,6 @@ function check(char){
 
 function getRandomLevel(){
 
-    // toto random mozno nejako inak zistit lebo v zadani je nejaky divny iny random chcu...
     let random = Math.floor(Math.random() * 5);
     console.log(random);
 
@@ -282,25 +282,45 @@ reset.addEventListener("click", () => {
     restartLevel();
 })
 
-hint.onmouseover = function (){
-    hintDiv.innerHTML = current.clue;
-    hintDiv.style.visibility = "visible"
+hint.addEventListener("click", () => {
+    offcanvasLabel.innerHTML = "Hint";
+    offcanvasText.innerHTML = current.clue;
+})
+
+/*result.addEventListener("click", () => {
+    console.log("aaaaaa");
+    console.log(offcanvasLabel);
+    offcanvasLabel.innerHTML = "Result";
+    offcanvasText.innerHTML = current.word;
+})*/
+
+tutorial.addEventListener("click", () => {
+    console.log(offcanvasLabel);
+    offcanvasLabel.innerHTML = "Tutorial";
+    offcanvasText.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením.";
+})
+
+function testResult(){
+    console.log("aaaaaa");
+    console.log(offcanvasLabel);
+    offcanvasLabel.innerHTML = "Result";
+    offcanvasText.innerHTML = current.word;
 }
 
-
-hint.onmouseout = function (){
-    hintDiv.style.visibility = "hidden";
+/*hint.onclick = function (){
+    offcanvaLabel.innerHTML = "Hint";
+    offcanvasText.innerHTML = current.clue;
 }
 
-result.onmouseover = function (){
-    resultDiv.innerHTML = current.word;
-    resultDiv.style.visibility = "visible"
+result.onclick = function (){
+    offcanvaLabel.innerHTML = "Result";
+    offcanvasText.innerHTML = current.word;
 }
 
-
-result.onmouseout = function (){
-    resultDiv.style.visibility = "hidden";
-}
+tutorial.onclick = function (){
+    offcanvaLabel.innerHTML = "Tutorial";
+    offcanvasText.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením.";
+}*/
 
 //modal
 closeBtn.addEventListener("click", () => {

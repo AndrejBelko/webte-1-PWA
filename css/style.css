@@ -31,14 +31,6 @@
     font-size: 3rem;
 }
 
-#hintDiv{
-    visibility: hidden;
-}
-
-#resultDiv{
-    visibility: hidden;
-}
-
 .modal {
     display: none;
     position: fixed;
