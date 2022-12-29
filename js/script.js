@@ -299,9 +299,12 @@ nextMenu.addEventListener("click", () => {
     nextLevel();
 });
 
+shakeDetector.confirmPermissionGranted();
+shakeDetector.start();
+
 const acl = new Accelerometer({ frequency: 10 });
 acl.addEventListener("reading", () => {
-    if(acl.x > 10 || acl.y > 10){
+    if(acl.x > 12 || acl.y > 12){
         wordPlace.replaceChildren();
         restartLevel();
         console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
