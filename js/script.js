@@ -67,23 +67,15 @@ function loadChars(){
         charDiv.style.textAlign = "center";
         charDiv.style.lineHeight= "50px";
         charDiv.draggable = "true";
-        charDiv.addEventListener("dragenter",(e) => {
+        charDiv.addEventListener("dragstart",(e) => {
             if(!actDrag) {
                 actDrag = true;
                 dragged = e.target;
-                console.log(dragged);
-                //charDiv.style.visibility = "hidden";
             }
         })
         charDiv.addEventListener("dragend",(e) => {
             if(actDrag){
                 actDrag = false;
-
-                //nejako ze ak to draggol do end zony, nak zmizne, ak inde tak nak ostane, akoze to pismeno aktiualne tahane ved ty vies, ty vies
-                //potom zistic co draggol do end zony a ci sa to nechadza v slove, ak hej span zmenit na pismeno :)
-
-                console.log(e);
-                //charDiv.style.visibility = "hidden";
 
             }
 

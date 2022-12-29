@@ -1,6 +1,5 @@
-const staticCacheName = 'site-static-v2';
-const dynamicCache = 'site-dynamic-v1';
-const assets =[
+/*var cache_container = "static_v1";
+var static_files = [
     '/',
     '/index.html',
     '/js/script.js',
@@ -17,6 +16,51 @@ const assets =[
     '/images/9.png',
     '/images/10.png',
     '/fallback.html'
+];
+
+self.addEventListener('install', function(event){
+    event.waitUntil(
+        caches.open(cache_container)
+            .then(function(cache){
+                cache.addAll(static_files)
+            })
+    )
+})
+
+self.addEventListener('activate', function(event){
+    console.log("service worker activated", event)
+})
+
+self.addEventListener('fetch', function(event){
+    event.respondWith(
+        caches.match(event.request)
+            .then(function(response){
+                if(response){
+                    return response;
+                }
+            })
+    )
+})*/
+
+const staticCacheName = 'site-static';
+const dynamicCache = 'site-dynamic-v1';
+const assets =[
+    './',
+    './index.html',
+    './js/script.js',
+    './css/style.css',
+    './images/0.png',
+    './images/1.png',
+    './images/2.png',
+    './images/3.png',
+    './images/4.png',
+    './images/5.png',
+    './images/6.png',
+    './images/7.png',
+    './images/8.png',
+    './images/9.png',
+    './images/10.png',
+    './fallback.html'
 ] ;
 
 
@@ -32,7 +76,7 @@ const limitCacheSize = (name, size) => {
 }
 
 self.addEventListener('install', (evt) =>{
-   console.log('installed');
+    console.log('installed');
     evt.waitUntil(
         caches.open(staticCacheName).then(cache => {
             console.log('caching assets');
@@ -74,3 +118,4 @@ self.addEventListener('fetch', (evt) =>{
         })
     );
 });
+
