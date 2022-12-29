@@ -25,6 +25,8 @@ var hard = [];
 var current;
 var currImage;
 
+var actHMImage;
+
 
 navigator.serviceWorker.register('./sw.js')
     .then((reg) => console.log('registered',reg))
@@ -239,7 +241,8 @@ function resetHangman(){
     tmp.setAttribute("class","img-fluid");
     tmp.style.border = "2px solid black";
     tmp.style.borderRadius = "10px";
-    hangman.innerHTML = "";
+    actHMImage = tmp;
+    //hangman.innerHTML = "";
     hangman.appendChild(tmp);
 }
 
@@ -252,15 +255,7 @@ function incrementHangman(){
         return;
     }
     currImage++;
-    let tmp = document.createElement("img");
-    let value = "images/" + currImage.toString() + ".png";
-    tmp.setAttribute("src",value);
-    tmp.setAttribute("alt","hangman state");
-    tmp.setAttribute("class","img-fluid");
-    tmp.style.border = "2px solid black";
-    tmp.style.borderRadius = "10px";
-    hangman.innerHTML = "";
-    hangman.appendChild(tmp);
+    actHMImage.src = "images/" + currImage.toString() + ".png";
 }
 
 

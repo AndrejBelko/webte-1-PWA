@@ -20,6 +20,17 @@ const assets =[
 ] ;
 
 
+//cache size limit
+const limitCacheSize = (name, size) => {
+    caches.open(name).then(cache => {
+        cache.keys().then(keys => {
+            if(keys.length > size){
+                cache.delete(keys[0]).then(limitCacheSize(name, size))
+            }
+        })
+    })
+}
+
 self.addEventListener('install', (evt) =>{
    console.log('installed');
     evt.waitUntil(
@@ -52,9 +63,14 @@ self.addEventListener('fetch', (evt) =>{
             return cacheRes || fetch(evt.request).then(fetchRes => {
                 return caches.open(dynamicCache).then(cache => {
                     cache.put(evt.request.url, fetchRes.clone())
+                    limitCacheSize(dynamicCache, 15);
                     return fetchRes;
                 })
             });
-        }).catch(() => caches.match('/fallback.html'))
+        }).catch(() => {
+            if (evt.request.url.indexOf('.html') > -1) {
+                caches.match('/fallback.html');
+            }
+        })
     );
 });
