@@ -61,13 +61,12 @@ function loadChars(){
         const charDiv = document.createElement("div");
         charDiv.setAttribute("value",String.fromCharCode(i));
         charDiv.innerHTML = String.fromCharCode(i);
-        charDiv.style.height = "2%";
-        charDiv.style.width = "10%";
-        charDiv.style.fontSize = "80%"
+        charDiv.style.height = "50px";
+        charDiv.style.width = "50px";
         charDiv.style.border = "2px solid black";
         charDiv.style.borderRadius = "10px";
         charDiv.style.textAlign = "center";
-        charDiv.style.lineHeight= "200%";
+        charDiv.style.lineHeight= "50px";
         charDiv.style.background = "white";
         charDiv.draggable = "true";
         charDiv.addEventListener("dragstart",(e) => {
