@@ -67,6 +67,7 @@ function loadChars(){
         charDiv.style.borderRadius = "10px";
         charDiv.style.textAlign = "center";
         charDiv.style.lineHeight= "50px";
+        charDiv.style.background = "white";
         charDiv.draggable = "true";
         charDiv.addEventListener("dragstart",(e) => {
             if(!actDrag) {
@@ -74,10 +75,9 @@ function loadChars(){
                 dragged = e.target;
             }
         })
-        charDiv.addEventListener("dragend",(e) => {
+        charDiv.addEventListener("dragend",() => {
             if(actDrag){
                 actDrag = false;
-
             }
 
         })
@@ -134,10 +134,7 @@ function check(char){
     if(count === 0){
         incrementHangman();
     }
-
 }
-
-
 
 function getRandomLevel(){
 
@@ -183,6 +180,7 @@ function displayLevel(){
         let a = document.createElement("span");
         a.style.margin = "5px";
         a.innerHTML = actWordState[i];
+        a.style.width = "40px";
         wordPlace.appendChild(a);
     }
 }
@@ -211,8 +209,6 @@ function testCompletedLevel(){
             correct++;
         }
     }
-    console.log(correct);
-    console.log(current.word.length);
 
     if(correct === current.word.length){
         completedLevel("You win!");
@@ -222,6 +218,7 @@ function testCompletedLevel(){
 function completedLevel(text){
     modal.style.display = "block";
     message.innerHTML = text;
+    abeceda.style.visibility = "hidden";
     // zamknut pismenka nech sa enda laej tahat/klikat
 }
 
@@ -232,7 +229,6 @@ function resetHangman(){
     tmp.setAttribute("src","images/0.png");
     tmp.setAttribute("alt","hangman state");
     tmp.setAttribute("class","img-fluid");
-    tmp.style.border = "2px solid black";
     tmp.style.borderRadius = "10px";
     actHMImage = tmp;
     hangman.appendChild(tmp);
@@ -241,7 +237,6 @@ function resetHangman(){
 function incrementHangman(){
     if ( currImage === 9 ){
         completedLevel("You lost!")
-        abeceda.style.visibility = "hidden";
     }
     currImage++;
     actHMImage.src = "images/" + currImage.toString() + ".png";

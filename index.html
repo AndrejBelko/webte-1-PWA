@@ -4,62 +4,52 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta name="theme-color" content="#090000">
-    <title>Hangman</title>
+
+    <title>HangMan</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <link rel="manifest" crossorigin="use-credentials" href="manifest.json">
     <link rel="stylesheet" href="css/style.css">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
 
 </head>
-<body>
+
+<body class="bg-light">
 
 <div class="text-center bg-dark text-light p-1" id="TitleMenu">
-    <h1>HangMan</h1>
-
+    <h1 class="text-light">HangMan</h1>
     <div class="menu m-3">
         <button class="btn btn-light m-1" type="button" id="reset">Reset</button>
-
         <button class="btn btn-light m-1" type="button" id="difficulty">Medium</button>
-
         <button class="btn btn-light m-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" type="button" id="hint">Hint</button>
-
         <button class="btn btn-light m-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" type="button" id="result" >Result</button>
-
         <button class="btn btn-light m-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" id="tutorial">Tutorial</button>
-
         <button class="btn btn-light m-1" type="button" id="nextMenu">  Next  </button>
     </div>
 
 </div>
 
 <div class="container text-center">
-
-    <div id="hangman" class="text-center m-3">
-
+    <div id="hangman" class="text-center m-3 bg-white">
     </div>
 
-    <div id="wordPlace" class="m-3">
-
+    <div id="wordPlace" class="m-3 bg-white">
     </div>
 
     <div id="abeceda">
-
     </div>
+</div>
 
-    <div id="modal" class="modal">
-        <span id="closeBtn">&times;</span>
-        <div class="text-center bg-dark text-light p-1">
-            <h1 class="ms-3" id="message"></h1>
-            <div class="m-3">
-                <button class="btn btn-light m-1" id="retry">Retry</button>
-                <button class="btn btn-light m-1" id="next">Next</button>
-            </div>
+<div id="modal" class="modal">
+    <button type="button" class="btn-close btn-close-white text-reset" id="closeBtn"></button>
+    <div class="text-center bg-dark text-light p-1">
+        <h1 class="ms-4 text-light" id="message"></h1>
+        <div class="m-3">
+            <button class="btn btn-light m-1" id="retry">Retry</button>
+            <button class="btn btn-light m-1" id="next">Next</button>
         </div>
     </div>
-
 </div>
 
 <div class="offcanvas offcanvas-bottom text-light bg-dark " data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1" id="offcanvasBottom"
@@ -69,7 +59,7 @@
         <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body small ms-3 ">
+    <div class="offcanvas-body small ms-3 me-3">
         <div id="offcanvasText"></div>
     </div>
 </div>
