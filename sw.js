@@ -1,49 +1,4 @@
-/*var cache_container = "static_v1";
-var static_files = [
-    '/',
-    '/index.html',
-    '/js/script.js',
-    '/css/style.css',
-    '/images/0.png',
-    '/images/1.png',
-    '/images/2.png',
-    '/images/3.png',
-    '/images/4.png',
-    '/images/5.png',
-    '/images/6.png',
-    '/images/7.png',
-    '/images/8.png',
-    '/images/9.png',
-    '/images/10.png',
-    '/fallback.html'
-];
-
-self.addEventListener('install', function(event){
-    event.waitUntil(
-        caches.open(cache_container)
-            .then(function(cache){
-                cache.addAll(static_files)
-            })
-    )
-})
-
-self.addEventListener('activate', function(event){
-    console.log("service worker activated", event)
-})
-
-self.addEventListener('fetch', function(event){
-    event.respondWith(
-        caches.match(event.request)
-            .then(function(response){
-                if(response){
-                    return response;
-                }
-            })
-    )
-})*/
-
 const staticCacheName = 'site-static';
-const dynamicCache = 'site-dynamic-v1';
 const assets =[
     './',
     './index.html',
@@ -60,20 +15,11 @@ const assets =[
     './images/8.png',
     './images/9.png',
     './images/10.png',
-    './fallback.html'
+    './fallback.html',
+    './levels.json',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
 ] ;
-
-
-//cache size limit
-const limitCacheSize = (name, size) => {
-    caches.open(name).then(cache => {
-        cache.keys().then(keys => {
-            if(keys.length > size){
-                cache.delete(keys[0]).then(limitCacheSize(name, size))
-            }
-        })
-    })
-}
 
 self.addEventListener('install', (evt) =>{
     console.log('installed');
@@ -88,34 +34,19 @@ self.addEventListener('install', (evt) =>{
 
 
 self.addEventListener('activate', (evt) =>{
-    //console.log('activated');
-    evt.waitUntil(
-        caches.keys().then(keys => {
-            return Promise.all(keys
-                .filter(key => key !== staticCacheName && key !== dynamicCache)
-                .map(key => caches.delete(key))
-            )
-        })
-    )
+    console.log('activated',evt);
 });
 
 
+
 self.addEventListener('fetch', (evt) =>{
-    //console.log('fetched',evt);
     evt.respondWith(
-        caches.match(evt.request).then(cacheRes => {
-            return cacheRes || fetch(evt.request).then(fetchRes => {
-                return caches.open(dynamicCache).then(cache => {
-                    cache.put(evt.request.url, fetchRes.clone())
-                    limitCacheSize(dynamicCache, 15);
-                    return fetchRes;
-                })
-            });
-        }).catch(() => {
-            if (evt.request.url.indexOf('.html') > -1) {
-                caches.match('/fallback.html');
-            }
-        })
-    );
+        caches.match(evt.request)
+            .then(function(response){
+                if(response){
+                    return response;
+                }
+            })
+    )
 });
 
