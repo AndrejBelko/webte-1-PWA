@@ -78,6 +78,7 @@ function loadChars(){
         charDiv.addEventListener("dragend",() => {
             if(actDrag){
                 actDrag = false;
+
             }
 
         })
@@ -209,6 +210,8 @@ function testCompletedLevel(){
             correct++;
         }
     }
+    console.log(correct);
+    console.log(current.word.length);
 
     if(correct === current.word.length){
         completedLevel("You win!");
@@ -298,3 +301,18 @@ nextMenu.addEventListener("click", () => {
     wordPlace.replaceChildren();
     nextLevel();
 });
+
+const acl = new Accelerometer({ frequency: 10 });
+acl.addEventListener("reading", () => {
+    if(acl.x > 10 || acl.y > 10){
+        wordPlace.replaceChildren();
+        restartLevel();
+        console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+    }
+
+    console.log(`Acceleration along the X-axis ${acl.x}`);
+    console.log(`Acceleration along the Y-axis ${acl.y}`);
+    console.log(`Acceleration along the Z-axis ${acl.z}`);
+});
+
+acl.start();
