@@ -36,7 +36,7 @@ self.addEventListener('install', (evt) =>{
 self.addEventListener('activate', (evt) =>{
     console.log('activated',evt);
 });
-
+//
 
 
 self.addEventListener('fetch', (evt) =>{

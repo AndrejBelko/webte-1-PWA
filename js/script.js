@@ -53,6 +53,7 @@ fetch("./levels.json")
     })
 
 function loadChars(){
+    abeceda.style.visibility = "visible";
     abeceda.innerHTML = "";
     let device = navigator.userAgent;
     let regexp = /android|iphone|kindle|ipad/i;
@@ -234,17 +235,13 @@ function resetHangman(){
     tmp.style.border = "2px solid black";
     tmp.style.borderRadius = "10px";
     actHMImage = tmp;
-    //hangman.innerHTML = "";
     hangman.appendChild(tmp);
 }
 
 function incrementHangman(){
     if ( currImage === 9 ){
         completedLevel("You lost!")
-    }
-    if ( currImage >= 10 ){ // positka lebo este neni zmeznene tahanie po skonceni levelu
-        completedLevel("You lost! man wtf u doin")
-        return;
+        abeceda.style.visibility = "hidden";
     }
     currImage++;
     actHMImage.src = "images/" + currImage.toString() + ".png";
