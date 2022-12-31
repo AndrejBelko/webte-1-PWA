@@ -16,6 +16,7 @@ var next = document.getElementById("next");
 var retry = document.getElementById("retry");
 var closeBtn = document.getElementById("closeBtn");
 
+
 var dragged;
 var actDrag = false;
 
@@ -55,8 +56,6 @@ fetch("./levels.json")
 function loadChars(){
     abeceda.style.visibility = "visible";
     abeceda.innerHTML = "";
-    let device = navigator.userAgent;
-    let regexp = /android|iphone|kindle|ipad/i;
     for(let i = 65; i < 91; i++){
         const charDiv = document.createElement("div");
         charDiv.setAttribute("value",String.fromCharCode(i));
@@ -73,24 +72,39 @@ function loadChars(){
                 dragged = e.target;
             }
         })
+
         charDiv.addEventListener("dragend",() => {
             if(actDrag){
                 actDrag = false;
-
             }
-
         })
-        if (regexp.test(device)) {
-            charDiv.addEventListener("click", (e) => {
 
-                dragged = e.target;
+        charDiv.addEventListener('touchstart',(e) => {
+            dragged = e.target;
+            disableScroll();
+        })
+
+        charDiv.addEventListener('touchend',(e) => {
+            var changedTouch = e.changedTouches[0];
+            var elem = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
+            if(elem.id === wordPlace.id || elem.parentElement.id === wordPlace.id){
                 check(dragged);
-            })
-        }
+            }
+            enableScroll();
+        })
+
         abeceda.appendChild(charDiv);
     }
     console.log(medium);
     console.log(hard);
+}
+
+function disableScroll() {
+    document.body.classList.add("stop-scrolling");
+}
+
+function enableScroll() {
+    document.body.classList.remove("stop-scrolling");
 }
 
 
