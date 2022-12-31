@@ -37,21 +37,30 @@ navigator.serviceWorker.register('./sw.js')
 var usedWords = [];
 var actWordState = [];
 
+if(localStorage.getItem("usedLevels") === null){
+    fetch("./levels.json")
+        .then(res => res.json())
+        .then(data => {
 
-fetch("./levels.json")
-    .then(res => res.json())
-    .then(data => {
+            data.medium.forEach(level => {
+                medium.push(level);
+            })
 
-        data.medium.forEach(level => {
-            medium.push(level);
+            data.hard.forEach(level => {
+                hard.push(level);
+            })
+
+            localStorage.setItem("mediumLevels", JSON.stringify(medium));
+            localStorage.setItem("hardLevels",JSON.stringify(hard));
+            localStorage.setItem("usedLevels",JSON.stringify(usedWords));
+            nextLevel();
         })
-
-        data.hard.forEach(level => {
-            hard.push(level);
-        })
-
-        nextLevel();
-    })
+}else{
+    medium = JSON.parse(localStorage.getItem("mediumLevels"));
+    hard = JSON.parse(localStorage.getItem("hardLevels"));
+    usedWords = JSON.parse(localStorage.getItem("usedLevels"));
+    nextLevel();
+}
 
 function loadChars(){
     abeceda.style.visibility = "visible";
@@ -169,16 +178,23 @@ function getRandomLevel(){
     }
 
     if(usedWords.length < 5) {
+        console.log("usedwords length", usedWords.length);
         for (let i = 0; i < usedWords.length; i++) {
-            if (usedWords[i] === current) {
+            console.log("for used words [i]", usedWords[i]);
+            console.log("current", current);
+            if (usedWords[i].word == current.word) {
+                console.log("current", current);
                 current = null;
+                break;
             }
         }
     }
-    if(current === null) {
+
+    if(current == null) {
         getRandomLevel();
     }else{
         usedWords.push(current);
+        localStorage.setItem("usedLevels",JSON.stringify(usedWords));
     }
 
     for (let i = 0; i < current.word.length;i++){
@@ -233,7 +249,6 @@ function completedLevel(text){
     modal.style.display = "block";
     message.innerHTML = text;
     abeceda.style.visibility = "hidden";
-    // zamknut pismenka nech sa enda laej tahat/klikat
 }
 
 function resetHangman(){
@@ -249,7 +264,7 @@ function resetHangman(){
 }
 
 function incrementHangman(){
-    if ( currImage === 9 ){
+    if ( currImage >= 9 ){
         completedLevel("You lost!")
     }
     currImage++;
@@ -265,7 +280,7 @@ difficulty.addEventListener("click", () => {
         difficulty.innerHTML = "Medium";
     }
     usedWords = [];
-    console.log(usedWords);
+    localStorage.setItem("usedLevels",JSON.stringify(usedWords));
     wordPlace.replaceChildren();
     nextLevel();
 })
