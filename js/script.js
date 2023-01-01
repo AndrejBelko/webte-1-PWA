@@ -28,14 +28,15 @@ var currImage;
 
 var actHMImage;
 
+var actDifficulty;
+
+var usedWords = [];
+var actWordState = [];
 
 navigator.serviceWorker.register('./sw.js')
     .then((reg) => console.log('registered',reg))
     .catch((err) => console.log('not registered',err))
 
-
-var usedWords = [];
-var actWordState = [];
 
 if(localStorage.getItem("usedLevels") === null){
     fetch("./levels.json")
@@ -53,12 +54,17 @@ if(localStorage.getItem("usedLevels") === null){
             localStorage.setItem("mediumLevels", JSON.stringify(medium));
             localStorage.setItem("hardLevels",JSON.stringify(hard));
             localStorage.setItem("usedLevels",JSON.stringify(usedWords));
+            actDifficulty = "Medium";
+            localStorage.setItem("difficulty",JSON.stringify(actDifficulty));
+            difficulty.innerHTML = actDifficulty;
             nextLevel();
         })
 }else{
     medium = JSON.parse(localStorage.getItem("mediumLevels"));
     hard = JSON.parse(localStorage.getItem("hardLevels"));
     usedWords = JSON.parse(localStorage.getItem("usedLevels"));
+    actDifficulty  = JSON.parse(localStorage.getItem("difficulty"));
+    difficulty.innerHTML = actDifficulty;
     nextLevel();
 }
 
@@ -182,7 +188,7 @@ function getRandomLevel(){
         for (let i = 0; i < usedWords.length; i++) {
             console.log("for used words [i]", usedWords[i]);
             console.log("current", current);
-            if (usedWords[i].word == current.word) {
+            if (usedWords[i].word === current.word) {
                 console.log("current", current);
                 current = null;
                 break;
@@ -195,12 +201,11 @@ function getRandomLevel(){
     }else{
         usedWords.push(current);
         localStorage.setItem("usedLevels",JSON.stringify(usedWords));
-    }
 
-    for (let i = 0; i < current.word.length;i++){
-        actWordState[i] = '_';
+        for (let i = 0; i < current.word.length;i++){
+            actWordState[i] = '_';
+        }
     }
-
 }
 
 function displayLevel(){
@@ -273,14 +278,17 @@ function incrementHangman(){
 
 
 difficulty.addEventListener("click", () => {
-    if (difficulty.innerHTML === "Medium"){
-        difficulty.innerHTML = "Hard";
+    if (actDifficulty === "Medium"){
+        actDifficulty = "Hard";
+        difficulty.innerHTML = actDifficulty;
     }
     else{
-        difficulty.innerHTML = "Medium";
+        actDifficulty = "Medium";
+        difficulty.innerHTML = actDifficulty;
     }
     usedWords = [];
     localStorage.setItem("usedLevels",JSON.stringify(usedWords));
+    localStorage.setItem("difficulty",JSON.stringify(actDifficulty));
     wordPlace.replaceChildren();
     nextLevel();
 })
