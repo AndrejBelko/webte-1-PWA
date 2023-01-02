@@ -65,7 +65,13 @@ if(localStorage.getItem("usedLevels") === null){
     usedWords = JSON.parse(localStorage.getItem("usedLevels"));
     actDifficulty  = JSON.parse(localStorage.getItem("difficulty"));
     difficulty.innerHTML = actDifficulty;
-    nextLevel();
+    current = JSON.parse(localStorage.getItem("current"));
+    for (let i = 0; i < current.word.length;i++){
+        actWordState[i] = '_';
+    }
+    loadChars();
+    displayLevel();
+    resetHangman();
 }
 
 function loadChars(){
@@ -169,7 +175,7 @@ function getRandomLevel(){
     let random = Math.floor(Math.random() * 5);
     console.log(random);
 
-    if (difficulty.innerHTML === "Medium"){
+    if (actDifficulty === "Medium"){
         for (let i = 0; i < medium.length;i++){
             if (i === random){
                 current = medium[i];
@@ -183,27 +189,36 @@ function getRandomLevel(){
         }
     }
 
-    if(usedWords.length < 5) {
-        console.log("usedwords length", usedWords.length);
-        for (let i = 0; i < usedWords.length; i++) {
-            console.log("for used words [i]", usedWords[i]);
-            console.log("current", current);
-            if (usedWords[i].word === current.word) {
-                console.log("current", current);
-                current = null;
-                break;
-            }
+    if(actDifficulty === "Medium"){
+        if(usedWords.length < medium.length) {
+            repeating();
+        }
+    } else{
+        if(usedWords.length < hard.length) {
+            repeating();
         }
     }
 
     if(current == null) {
         getRandomLevel();
     }else{
-        usedWords.push(current);
-        localStorage.setItem("usedLevels",JSON.stringify(usedWords));
+        localStorage.setItem("current",JSON.stringify(current));
 
         for (let i = 0; i < current.word.length;i++){
             actWordState[i] = '_';
+        }
+    }
+}
+
+function repeating(){
+    console.log("usedwords length", usedWords.length);
+    for (let i = 0; i < usedWords.length; i++) {
+        console.log("for used words [i]", usedWords[i]);
+        console.log("current", current);
+        if (usedWords[i].word === current.word) {
+            console.log("current", current);
+            current = null;
+            break;
         }
     }
 }
@@ -322,6 +337,8 @@ closeBtn.addEventListener("click", () => {
 next.addEventListener("click", () => {
     modal.style.display = "none";
     wordPlace.replaceChildren();
+    usedWords.push(current);
+    localStorage.setItem("usedLevels",JSON.stringify(usedWords));
     nextLevel();
 });
 
@@ -333,6 +350,8 @@ retry.addEventListener("click", () => {
 
 nextMenu.addEventListener("click", () => {
     wordPlace.replaceChildren();
+    usedWords.push(current);
+    localStorage.setItem("usedLevels",JSON.stringify(usedWords));
     nextLevel();
 });
 
