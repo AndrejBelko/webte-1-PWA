@@ -36,7 +36,8 @@ self.addEventListener('install', (evt) =>{
     );
 
 });
-//
+
+
 
 self.addEventListener('activate', (evt) =>{
     evt.waitUntil(
@@ -44,15 +45,15 @@ self.addEventListener('activate', (evt) =>{
             return Promise.all(keys
                 .filter(key => key !== staticCacheName)
                 .map(key => caches.delete(key))
-            )
+            );
         })
-    )
+    );
 });
 
 self.addEventListener('fetch', (evt) =>{
     evt.respondWith(
         caches.match(evt.request).then(cacheRes => {
-            return cacheRes || fetch(evt.request)
+            return cacheRes || fetch(evt.request);
         })
     );
 });

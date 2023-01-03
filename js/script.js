@@ -38,7 +38,7 @@ var actWordState = [];
 
 navigator.serviceWorker.register('./sw.js')
     .then((reg) => console.log('registered',reg))
-    .catch((err) => console.log('not registered',err))
+    .catch((err) => console.log('not registered',err));
 
 
 if(localStorage.getItem("usedLevels") === null){
@@ -48,11 +48,11 @@ if(localStorage.getItem("usedLevels") === null){
 
             data.medium.forEach(level => {
                 medium.push(level);
-            })
+            });
 
             data.hard.forEach(level => {
                 hard.push(level);
-            })
+            });
 
             localStorage.setItem("mediumLevels", JSON.stringify(medium));
             localStorage.setItem("hardLevels",JSON.stringify(hard));
@@ -61,7 +61,7 @@ if(localStorage.getItem("usedLevels") === null){
             localStorage.setItem("difficulty",JSON.stringify(actDifficulty));
             difficulty.innerHTML = actDifficulty;
             nextLevel();
-        })
+        });
 }else{
     medium = JSON.parse(localStorage.getItem("mediumLevels"));
     hard = JSON.parse(localStorage.getItem("hardLevels"));
@@ -97,27 +97,29 @@ function loadChars(){
                 actDrag = true;
                 dragged = e.target;
             }
-        })
+        });
 
         charDiv.addEventListener("dragend",() => {
             if(actDrag){
                 actDrag = false;
             }
-        })
+        });
 
         charDiv.addEventListener('touchstart',(e) => {
             dragged = e.target;
+            charDiv.setAttribute("class","letters text-light bg-dark");
             disableScroll();
-        })
+        });
 
         charDiv.addEventListener('touchend',(e) => {
+            charDiv.setAttribute("class","letters");
             var changedTouch = e.changedTouches[0];
             var elem = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
             if(elem.id === wordPlace.id || elem.parentElement.id === wordPlace.id){
                 check(dragged);
             }
             enableScroll();
-        })
+        });
 
         abeceda.appendChild(charDiv);
     }
@@ -136,19 +138,19 @@ function enableScroll() {
 
 document.getElementById("wordPlace").addEventListener('dragover',(e) =>{
     e.preventDefault();
-})
+});
 document.getElementById("wordPlace").addEventListener('dragleave',(e) =>{
     e.preventDefault();
-})
+});
 document.getElementById("wordPlace").addEventListener('dragstart',(e) =>{
     e.preventDefault();
-})
+});
 
 document.getElementById("wordPlace").addEventListener('drop',(e) =>{
     e.preventDefault();
     dragged.style.visibility = "visible";
     check(dragged);
-})
+});
 
 function check(char){
 
@@ -292,7 +294,7 @@ function resetHangman(){
 
 function incrementHangman(){
     if ( currImage >= 9 ){
-        completedLevel("You lost!")
+        completedLevel("You lost!");
     }
     currImage++;
     actHMImage.src = "images/" + currImage.toString() + ".png";
@@ -313,33 +315,33 @@ difficulty.addEventListener("click", () => {
     localStorage.setItem("difficulty",JSON.stringify(actDifficulty));
     wordPlace.replaceChildren();
     nextLevel();
-})
+});
 
 reset.addEventListener("click", () => {
     wordPlace.replaceChildren();
     restartLevel();
-})
+});
 
 
 hint.onclick = function (){
     offcanvasLabel.innerHTML = "Hint";
     offcanvasText.innerHTML = current.clue;
-}
+};
 
 result.onclick = function (){
     offcanvasLabel.innerHTML = "Result";
     offcanvasText.innerHTML = current.word.toUpperCase();
-}
+};
 
 tutorial.onclick = function (){
-    offcanvasLabel.innerHTML = "Tutorial";
+    offcanvasLabel.innerHTML = "Info";
     offcanvasText.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením.";
 
     let device = navigator.userAgent;
     if(/android|iphone|kindle|ipad/i.test(device)){
-        offcanvasText.innerHTML += "Na reštart levelu stačí zatriasť mobilným zariadením."
+        offcanvasText.innerHTML += " Na reštart levelu stačí zatriasť mobilným zariadením.";
     }
-}
+};
 
 //modal
 closeBtn.addEventListener("click", () => {
@@ -374,10 +376,6 @@ acl.addEventListener("reading", () => {
         wordPlace.replaceChildren();
         restartLevel();
     }
-
-    console.log(`Acceleration along the X-axis ${acl.x}`);
-    console.log(`Acceleration along the Y-axis ${acl.y}`);
-    console.log(`Acceleration along the Z-axis ${acl.z}`);
 });
 
 acl.start();
