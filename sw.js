@@ -25,7 +25,7 @@ const assets =[
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
 ] ;
-//ňnn
+
 self.addEventListener('install', (evt) =>{
     console.log('installed');
     evt.waitUntil(
@@ -36,10 +36,9 @@ self.addEventListener('install', (evt) =>{
     );
 
 });
-
+//
 
 self.addEventListener('activate', (evt) =>{
-    //console.log('activated');
     evt.waitUntil(
         caches.keys().then(keys => {
             return Promise.all(keys
@@ -49,15 +48,8 @@ self.addEventListener('activate', (evt) =>{
         })
     )
 });
-//
-//
-//
-//
-//
-//
 
 self.addEventListener('fetch', (evt) =>{
-    //console.log('fetched',evt);
     evt.respondWith(
         caches.match(evt.request).then(cacheRes => {
             return cacheRes || fetch(evt.request)

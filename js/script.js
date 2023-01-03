@@ -16,6 +16,9 @@ var next = document.getElementById("next");
 var retry = document.getElementById("retry");
 var closeBtn = document.getElementById("closeBtn");
 
+var printInfo = document.getElementById("printInfoText");
+var printHint = document.getElementById("printHintText");
+
 
 var dragged;
 var actDrag = false;
@@ -66,6 +69,8 @@ if(localStorage.getItem("usedLevels") === null){
     actDifficulty  = JSON.parse(localStorage.getItem("difficulty"));
     difficulty.innerHTML = actDifficulty;
     current = JSON.parse(localStorage.getItem("current"));
+    printInfo.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením. Na mobilnom zariadení stačí pre reštart hry zatriasť mobilom.";
+    printHint.innerHTML = current.clue;
     for (let i = 0; i < current.word.length;i++){
         actWordState[i] = '_';
     }
@@ -203,6 +208,8 @@ function getRandomLevel(){
         getRandomLevel();
     }else{
         localStorage.setItem("current",JSON.stringify(current));
+        printInfo.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením. Na mobilnom zariadení stačí pre reštart hry zatriasť mobilom.";
+        printHint.innerHTML = current.clue;
 
         for (let i = 0; i < current.word.length;i++){
             actWordState[i] = '_';
@@ -326,7 +333,12 @@ result.onclick = function (){
 
 tutorial.onclick = function (){
     offcanvasLabel.innerHTML = "Tutorial";
-    offcanvasText.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením. Na mobilnom zariadení stačí pre reštart hry zatriasť mobilom.";
+    offcanvasText.innerHTML = "Cieľom hry je nájsť skryté slovo, pred tým ako obesia obesenca. Vybrané písmeno pretiahnite na ľubovoľné miesto do priestoru so skrytým slovom. Ak sa v skrytom slove nachádza toto písmeno, odokryje sa. Ak však skryté slovo toto písmeno neobsahuje, v obrázku sa dokreslí čiara. Hra konči uhádnutím skrytého slova alebo obesením.";
+
+    let device = navigator.userAgent;
+    if(/android|iphone|kindle|ipad/i.test(device)){
+        offcanvasText.innerHTML += "Na reštart levelu stačí zatriasť mobilným zariadením."
+    }
 }
 
 //modal
